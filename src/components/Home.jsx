@@ -4,7 +4,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const navigateToItem = () => {
-    navigate('/item-information');
+    navigate('/login');
   };
 
   return (
