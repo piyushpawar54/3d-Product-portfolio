@@ -3,11 +3,13 @@ import ItemInformation from './components/ItemInformation';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import CartItem from './components/CartItem';
-import Login from './components/Login';
+import Login from './components/login/Login';
 import AdminPanel from './components/AdminPanel';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react';
+import New from './components/new/New';
+import { productInputs } from './components/FormSource';
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);
@@ -15,8 +17,6 @@ export default function App() {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
-
-  console.log(currentUser);
 
   return (
     <BrowserRouter>
@@ -31,6 +31,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <AdminPanel />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/new"
+            element={
+              <RequireAuth>
+                <New inputs={productInputs} title="Add New Product" />
               </RequireAuth>
             }
           />
